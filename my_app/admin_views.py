@@ -1,0 +1,18 @@
+from google.appengine.api import users
+from flask import render_template
+from flask.ext.admin import BaseView, expose
+from flask.ext.admin.base import AdminIndexView
+from werkzeug.routing import RequestRedirect
+import logging
+
+
+class AuthView(BaseView):
+    def is_accessible(self):
+        return True
+
+
+class AdminIndex(AuthView, AdminIndexView):
+    @expose('/')
+    def index(self):
+        return self.render('index.html')
+

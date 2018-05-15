@@ -1,0 +1,106 @@
+{% extends 'base_angular.html' %}
+{% block angular_content %}
+    <div ng-controller="todoCtrl" class="row">
+        <!--/col-->
+        <div class="container">
+            <div class="col-md-12" >
+                    <!-- form user info -->
+                <div class="col-md-8 offset-md-2">
+                    <span class="anchor" id="formUserEdit"></span>
+                    <hr class="my-5">
+
+
+
+                    <!-- *  FIRST STEP *-->
+
+                    <div class="card card-outline-secondary">
+                        <div class="card-header">
+                            <h3 class="mb-0">Solicitud de Credito</h3>
+                        </div>
+
+                        <div>
+                            <div class="alert alert-success" ng-hide="!(success)">
+                                <strong>Exito!</strong> {[{ message }]}
+                            </div>
+                            <div class="alert alert-danger" ng-hide="!(danger)">
+                                <strong>Error!</strong> {[{ message }]}
+                            </div>
+                            <div class="alert alert-info" ng-hide="!(info)">
+                                <strong>Alerta!</strong> {[{ message }]}
+                            </div>
+
+                        </div>
+
+
+                        <div class="card-body" ng-hide="(twostep)">
+                            <br>
+                            <h4> Registro de Cliente </h4>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-form-label form-control-label">Identificación</label>
+                                <div class="col-lg-12">
+                                    <input class="form-control" type="text"  ng-model="form.id" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-form-label form-control-label">Nombre</label>
+                                <div class="col-lg-12">
+                                    <input class="form-control" type="text" ng-model="form.nombre">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-form-label form-control-label">Apellido</label>
+                                <div class="col-lg-12">
+                                    <input class="form-control" type="text" ng-model="form.apellido">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                                <div class="col-lg-12">
+                                    <input class="form-control" type="email" ng-model="form.email" >
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label"></label>
+                                <div class="col-lg-9">
+                                    <input type="reset" class="btn btn-secondary" value="Cancelar" ng-click="clearData()">
+                                    <input type="submit" class="btn btn-primary" value="Continuar" ng-click="saveData()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--  SECOND STEP -->
+                        <div class="card-body" ng-hide="!(tree_step)">
+                            <br>
+                            <h4> Terminar Solicitud </h4>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-form-label form-control-label">NIT</label>
+                                <div class="col-lg-12">
+                                    <input class="form-control" type="text"  ng-model="form.nit" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 col-form-label form-control-label">Salario</label>
+                                <div class="col-lg-12">
+                                    <input class="form-control" type="text" ng-model="form.salario">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label"></label>
+                                <div class="col-lg-9">
+                                    <input type="reset" class="btn btn-secondary" value="Cancelar" ng-click="clearData()">
+                                    <input type="submit" class="btn btn-primary" value="Consultar" ng-click="saveRequest()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- THIRD STEP -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
