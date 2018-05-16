@@ -1,11 +1,9 @@
 /**
  * function called after loading of endpoint client
  */
-function init() {
+function init(){
   window.init();
-//  console.log('Endpoints client loaded.');
 }
-
 
 /**
  * The main Todo app module
