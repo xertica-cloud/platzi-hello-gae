@@ -3,16 +3,12 @@ from flask import render_template, request
 import json
 import logging
 from models import Usuario, Solicitud
+from google.appengine.api import mail
 
 # Flask views
 @app.route('/')
 def index():
     return '<a href="/admin/">Solicitar un nuevo credito</a>'
-
-@app.route('/_ah/warmup')
-def warmup():
-    #TODO: Warmup
-    return 'Warming Up...'
 
 
 @app.route('/registrar', methods=['GET', 'POST'])
@@ -23,21 +19,24 @@ def registrar_usuario():
 
         response = {}
 
-        if Usuario.query(Usuario.identificacion == int(json_request['id'])).get():
+        # Consultar usuario por identificacion
+        usuario = Usuario.obtener_usuario_por_id(int(json_request['id']))
+
+        if usuario:
             response['status'] = '403'
             response['message'] = 'El usuario ya se encuentra registrado'
         else:
-            nuevo_usuario = Usuario()
-            nuevo_usuario.identificacion = int(json_request['id'])
-            nuevo_usuario.nombre = json_request['nombre']
-            nuevo_usuario.apellido = json_request['apellido']
-            nuevo_usuario.put()
+            # Registrar usuario en datastore
+            nuevo_usuario = Usuario.registrar_nuevo_usuario(
+                identificacion=int(json_request['id']),
+                nombre=json_request['nombre'],
+                apellido=json_request['apellido']
+            )
 
             response['status'] = '200'
             response['message'] = 'El usuario fue registrado satisfactoriamente'
 
-
-
+        # Retornar respuesta
         return json.dumps(response)
 
     return "error"
@@ -50,26 +49,31 @@ def solicitar_prestamo():
         logging.info(json_request)
         response = {}
 
-        solicitud = Solicitud()
-        solicitud.id_usuario = int(json_request['id'])
+        status = ''
+        valor_aprobado = 0
 
         if int(json_request['salario']) > 800000:
-            solicitud.status = 'APROBADO'
+            status = 'APROBADO'
             if int(json_request['salario']) <= 1000000:
-                solicitud.valor_aprobado = 5000000
+                valor_aprobado = 5000000
             elif int(json_request['salario']) > 1000000 and int(json_request['salario']) < 4000000:
-                solicitud.valor_aprobado = 20000000
+                valor_aprobado = 20000000
             else:
-                solicitud.valor_aprobado = 50000000
+                valor_aprobado = 50000000
         else:
-            solicitud.status = 'RECHAZADO'
-            solicitud.valor_aprobado = 0
+            status = 'RECHAZADO'
+            valor_aprobado = 0
 
-        solicitud.put()
+        solicitud = Solicitud.registrar_solicitud(
+            id_usuario=int(json_request['id']),
+            salario=int(json_request['salario']),
+            status=status,
+            valor_aprobado=valor_aprobado
+        )
 
         response['status'] = '200'
-        response['status_solicitud'] = solicitud.status
-        response['valor_aprobado'] = solicitud.valor_aprobado
+        response['status_solicitud'] = status
+        response['valor_aprobado'] = valor_aprobado
 
         return json.dumps(response)
 

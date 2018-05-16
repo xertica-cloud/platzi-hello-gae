@@ -141,9 +141,11 @@ todoCtrl = Todo_app.controller('todoCtrl', function ($window, $scope) {
                                 if(json.status == 'RECHAZADO'){
                                     $scope.warning = true;
                                     $scope.message = "En el momento ud no cumple con las condiciones";
+                                    $scope.tree_step = false;
                                 } else {
                                     $scope.success = true;
                                     $scope.message = "Señor usuario " + $scope.form.nombre + " su credito fue aprobado por " + json.valor_aprobado;
+                                    $scope.tree_step = false;
                                 }
                         }});
                     }, 2000);
