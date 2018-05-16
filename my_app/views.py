@@ -78,3 +78,17 @@ def solicitar_prestamo():
         return json.dumps(response)
 
     return "error"
+
+
+@app.route('/entregar_reporte')
+def entregar_reporte():
+    message = mail.EmailMessage(
+        sender="adriana.moya@ubate.org",
+        subject="Your account has been approved")
+
+    message.to = "Albert Johnson <Albert.Johnson@example.com>"
+    message.body = """Dear Albert:"""
+
+    message.send()
+
+    return True

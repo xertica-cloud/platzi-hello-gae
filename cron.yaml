@@ -1,0 +1,6 @@
+cron:
+
+- description: Daily signature monitoring job V2
+  url: /entregar_reporte
+  schedule: every day 02:30
+  timezone: America/Bogota
