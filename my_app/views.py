@@ -4,7 +4,8 @@ import json
 import logging
 from models import Usuario, Solicitud
 from google.appengine.api import mail
-import tasks
+from tasks import enviar_email
+from google.appengine.ext import deferred
 
 # Flask views
 @app.route('/')
@@ -106,10 +107,11 @@ def entregar_reporte():
 
         body = 'Le fue aprobado un prestamo por el valor de ' + str(solicitud.valor_aprobado)
 
-        tasks.enviar_email(
-            subject='Detalle solicitud de prestamo',
-            destiny=usuario.email,
-            body=body
+        deferred.defer(enviar_email,
+                       subject='Detalle solicitud de prestamo',
+                       destiny=usuario.email,
+                       body=body,
+                       _queue='mail-queue'
         )
 
     return "Reportes entregados"
