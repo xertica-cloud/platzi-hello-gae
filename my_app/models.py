@@ -54,3 +54,19 @@ class Solicitud(EndpointsModel):
             status=status,
             valor_aprobado=valor_aprobado
         ).put().get()
+
+
+
+# RETO
+class Reglas(EndpointsModel):
+    # Crear propiedades
+
+    @staticmethod
+    def insertar_regla(rango_minimo, status):
+        # TODO: Insertar regla
+        return "Regla insertada"
+
+    @staticmethod
+    def listar_reglas():
+        # TODO: Listar Reglas
+        return "Listado de reglas"

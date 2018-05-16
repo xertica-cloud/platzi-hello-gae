@@ -65,6 +65,7 @@ def solicitar_prestamo():
             status = 'RECHAZADO'
             valor_aprobado = 0
 
+
         solicitud = Solicitud.registrar_solicitud(
             id_usuario=int(json_request['id']),
             salario=int(json_request['salario']),
@@ -80,3 +81,14 @@ def solicitar_prestamo():
         return json.dumps(response)
 
     return "error"
+
+@app.route('/insertar_reglas')
+def insertar_reglas():
+    """
+    Regla 1: Si el salario es menor a 800000 el credito es RECHAZADO
+    Regla 2: Si el salario es mayor a 800000 y menor a 1000000 es aprobado por 5000000
+    Regla 3: Si el salario es mayor a 1000000 y menor a 4000000 es aprobado por 2000000
+    Regla 4: Si el salario es mayor a 4000000 es aprobado por 50000000
+    :return:
+    """
+    return "Reglas Insertadas"
