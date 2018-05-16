@@ -20,7 +20,7 @@ class SolicitudesAPI(remote.Service):
     def listar_solicitudes(self, request):
 
         listado = []
-        solicitudes_usuario = Solicitud.listar_solicitudes_usuario(id=request.id)
+        solicitudes_usuario = Solicitud.listar_solicitudes_usuario(id=request.id_usuario)
 
         for item in solicitudes_usuario:
             entidad = SolicitudMessage(
