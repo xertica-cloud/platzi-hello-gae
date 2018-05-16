@@ -7,7 +7,7 @@ from my_app.models import Solicitud
 from api_messages import SOLICITUD_REQUEST, SolicitudMessage, SolicitudList
 
 @endpoints.api(
-    name='SolicitudesApi', version='v1', description=''
+    name='solicitudesApi', title='solicitudesApi',version='v1', description=''
 )
 class SolicitudesAPI(remote.Service):
 
