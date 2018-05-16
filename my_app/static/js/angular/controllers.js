@@ -1,11 +1,25 @@
 
-todoCtrl = Todo_app.controller('todoCtrl', function ($window, $scope) {
+todoCtrl = Todo_app.controller('todoCtrl', function ($window, $scope, EndpointService) {
     /*********************************/
     //Methods for the integration between Angular and Endpoints
 
+    $window.init = function() {
+      $scope.$apply($scope.load_todo_api);
+    };
+
+    $scope.load_apis = function() {
+        EndpointService.loadService('solicitudesApis', 'v1');
+    };
+
+    $scope.$watch(EndpointService.isLoaded, function(loaded) {
+        $scope.loaded = loaded;
+        if (loaded){
+            console.log("Apis Loaded");
+        }
+    });
+
     /**
      * overrides window init method for notifying to graphical interface when the api was loaded
-
 
     /*************************************/
     $scope.form = {};
