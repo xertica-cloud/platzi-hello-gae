@@ -12,6 +12,8 @@ libraries:
   version: "latest"
 - name: markupsafe
   version: "latest"
+- name: endpoints
+  version: "latest"
 
 inbound_services:
 - warmup

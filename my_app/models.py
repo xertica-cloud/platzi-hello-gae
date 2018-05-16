@@ -54,3 +54,8 @@ class Solicitud(EndpointsModel):
             status=status,
             valor_aprobado=valor_aprobado
         ).put().get()
+
+    @staticmethod
+    def listar_solicitudes_usuario(id):
+        solicitudes = Solicitud.query(Solicitud.id_usuario == id).fetch()
+        return solicitudes

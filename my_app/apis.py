@@ -2,43 +2,62 @@ import logging
 from google.appengine.ext import endpoints
 from protorpc import remote
 from my_app.models import TodoModel
+from my_app.models import Solicitud
+
+from api_messages import SOLICITUD_REQUEST, SolicitudMessage, SolicitudList
+
+@endpoints.api(
+    name='SolicitudesApi', version='v1', description=''
+)
+class SolicitudesAPI(remote.Service):
+
+    @endpoints.method(
+        SOLICITUD_REQUEST, SolicitudList,
+        path='listar_solicitudes',
+        name='listar_solicitudes',
+        http_method='GET'
+    )
+    def listar_solicitudes(self, request):
+
+        listado = []
+        solicitudes_usuario = Solicitud.listar_solicitudes_usuario(id=request.id)
+
+        for item in solicitudes_usuario:
+            entidad = SolicitudMessage(
+                id_usuario=request.id_usuario,
+                status=item.status,
+                valor_aprobado=item.valor_aprobado,
+                fecha_solicitud=item.fecha_solicitud
+            )
+            listado.append(entidad)
+
+        return SolicitudList(items=listado)
+
+    @Solicitud.method(
+        path='insertar_solicitud',
+        name='insertar_solicitud',
+        http_method='POST'
+    )
+    def insertar_solicitud(self, solicitud_entity):
+        solicitud_entity.put().get()
+        logging.info("Se inserto la entidad")
+        return solicitud_entity
 
 
-@endpoints.api(name='todo', version='v1', description='Eforcers TODO API')
-class TodoApi(remote.Service):
+    @Solicitud.method(
+        request_fields=('id_usuario',),
+        path='borrar_solicitud/{id_usuario}',
+        http_method='DELETE',
+        name='borrar_solicitud'
+    )
+    def borrar_solicitud(self, solicitud):
+        solicitud.key.delete()
+        return solicitud
 
-    @TodoModel.method(request_fields=('title',),
-                      response_fields=('completed','title','id'),
-                      path='todo',
-                      http_method='POST',
-                      name='todo.insert')
-    def TodoInsert(self, todo):
-        logging.info(todo)
-        todo.completed = False
-        todo.put()
-        return todo
-
-    @TodoModel.method(request_fields=('id',),
-                      path='todo/{id}',
-                      http_method='DELETE',
-                      name='todo.delete')
-    def TodoDelete(self, todo):
-        todo.key.delete()
-        return todo
-
-    @TodoModel.method(request_fields=('id',),
-                      response_fields=('completed','title','id'),
-                      path='todo/{id}',
-                      name='todo.toggle')
-    def TodoToggle(self, todo):
-        todo.completed = not todo.completed
-        todo.put()
-        return todo
-
-    @TodoModel.query_method(query_fields=('limit', 'order', 'pageToken'),
-                            collection_fields=('completed','title','id'),
-                            path='todos',
-                            name='todos.list')
-    def TodosList(self, query):
+    @Solicitud.query_method(
+        path='listar_solicitudes_simple',
+        name='listar_solicitudes_simple',
+        query_fields=('id_usuario','limit', 'order', 'pageToken')
+    )
+    def listar_por_usuario_simple(self, query):
         return query
-
