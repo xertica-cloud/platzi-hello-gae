@@ -1,6 +1,6 @@
 cron:
 
-- description: Daily signature monitoring job V2
+- description: Entrega diaria de reporte
   url: /entregar_reporte
   schedule: every day 02:30
   timezone: America/Bogota

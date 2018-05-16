@@ -46,7 +46,7 @@ class Solicitud(EndpointsModel):
         return solicitudes
 
     @staticmethod
-    def registrar_solicitud(id_usuario, nit, salario, fecha_ingreso, status, valor_aprobado):
+    def registrar_solicitud(id_usuario, nit, salario, status, valor_aprobado):
         return Solicitud(
             id_usuario=id_usuario,
             nit=nit,

@@ -4,6 +4,7 @@ import json
 import logging
 from models import Usuario, Solicitud
 from google.appengine.api import mail
+import tasks
 
 # Flask views
 @app.route('/')
@@ -30,7 +31,8 @@ def registrar_usuario():
             nuevo_usuario = Usuario.registrar_nuevo_usuario(
                 identificacion=int(json_request['id']),
                 nombre=json_request['nombre'],
-                apellido=json_request['apellido']
+                apellido=json_request['apellido'],
+                email=json_request['email']
             )
 
             response['status'] = '200'
@@ -68,6 +70,7 @@ def solicitar_prestamo():
             id_usuario=int(json_request['id']),
             salario=int(json_request['salario']),
             status=status,
+            nit=int(json_request['nit']),
             valor_aprobado=valor_aprobado
         )
 
@@ -80,8 +83,8 @@ def solicitar_prestamo():
     return "error"
 
 
-@app.route('/entregar_reporte')
-def entregar_reporte():
+@app.route('/entregar_email')
+def entregar_email():
     message = mail.EmailMessage(
         sender="adriana.moya@ubate.org",
         subject="Your account has been approved")
@@ -92,3 +95,21 @@ def entregar_reporte():
     message.send()
 
     return True
+
+
+@app.route('/entregar_reporte')
+def entregar_reporte():
+    solicitudes = Solicitud.consultar_ultimas_solicitudes()
+
+    for solicitud in solicitudes:
+        usuario = Usuario.obtener_usuario_por_id(solicitud.id_usuario)
+
+        body = 'Le fue aprobado un prestamo por el valor de ' + str(solicitud.valor_aprobado)
+
+        tasks.enviar_email(
+            subject='Detalle solicitud de prestamo',
+            destiny=usuario.email,
+            body=body
+        )
+
+    return "Reportes entregados"

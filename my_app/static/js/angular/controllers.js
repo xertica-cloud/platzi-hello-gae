@@ -51,7 +51,8 @@ todoCtrl = Todo_app.controller('todoCtrl', function ($window, $scope) {
             var data = {
             'id': $scope.form.id,
             'nombre': $scope.form.nombre,
-            'apellido': $scope.form.apellido
+            'apellido': $scope.form.apellido,
+            'email': $scope.form.email
             }
 
             console.log(data);
