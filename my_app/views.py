@@ -30,7 +30,8 @@ def registrar_usuario():
             nuevo_usuario = Usuario.registrar_nuevo_usuario(
                 identificacion=int(json_request['id']),
                 nombre=json_request['nombre'],
-                apellido=json_request['apellido']
+                apellido=json_request['apellido'],
+                email=json_request['email']
             )
 
             response['status'] = '200'
@@ -68,6 +69,7 @@ def solicitar_prestamo():
             id_usuario=int(json_request['id']),
             salario=int(json_request['salario']),
             status=status,
+            nit=int(json_request['nit']),
             valor_aprobado=valor_aprobado
         )
 
