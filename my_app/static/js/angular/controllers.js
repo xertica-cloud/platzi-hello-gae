@@ -109,6 +109,7 @@ todoCtrl = Todo_app.controller('todoCtrl', function ($window, $scope, EndpointSe
 
     };
 
+
     $scope.saveRequest = function(){
 
         $scope.clearAlerts();
@@ -174,6 +175,48 @@ todoCtrl = Todo_app.controller('todoCtrl', function ($window, $scope, EndpointSe
         }
 
     };
+
+
+    $scope.saveDataEndpoints = function(){
+
+        $scope.clearAlerts();
+
+        var id = $scope.form.id;
+        if (!id.match(/^\d+$/)){
+            $scope.danger = true;
+            $scope.message = "La identificación debe ser un entero";
+
+        } else if (typeof $scope.form.nombre === "undefined"  || typeof $scope.form.apellido === "undefined"){
+            $scope.danger = true;
+            $scope.message = "El nombre y apellido deben estar completos";
+
+        } else {
+            var data = {
+            'id': $scope.form.id,
+            'nombre': $scope.form.nombre,
+            'apellido': $scope.form.apellido,
+            'email': $scope.form.email
+            }
+
+            console.log(data);
+
+
+            endpointsService.listar_solicitudes(data, function(response) {
+
+                if (response.error) {
+                    console.log('error listando solicitudes');
+                    $scope.message = "El usuario ya se encuentra registrado";
+                    return false;
+                } else {
+                    $scope.message = response.message;
+                }
+
+            }
+
+        }
+
+    };
+
 
 
 });
