@@ -43,17 +43,6 @@ class SolicitudesAPI(remote.Service):
         logging.info("Se inserto la entidad")
         return solicitud_entity
 
-
-    @Solicitud.method(
-        request_fields=('id_usuario',),
-        path='borrar_solicitud/{id_usuario}',
-        http_method='DELETE',
-        name='borrar_solicitud'
-    )
-    def borrar_solicitud(self, solicitud):
-        solicitud.key.delete()
-        return solicitud
-
     @Solicitud.query_method(
         path='listar_solicitudes_simple',
         name='listar_solicitudes_simple',
