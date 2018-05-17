@@ -19,6 +19,11 @@ todoCtrl = Todo_app.controller('todoCtrl', function ($window, $scope) {
     $scope.twostep = false;
     $scope.tree_step = false;
     $scope.last_step = false;
+    $scope.show_files_button = false;
+    $scope.show_files = false;
+
+    $scope.files = [];
+    $scope.file_names = [];
 
     $scope.clearData = function(){
         $scope.form = {};
@@ -94,6 +99,37 @@ todoCtrl = Todo_app.controller('todoCtrl', function ($window, $scope) {
         }
 
     };
+
+    $scope.getDocuments = function(){
+        var xhr = new XMLHttpRequest();
+        var url = "/listar_documentos";
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "application/json")
+        xhr.onreadystatechange = function () {
+            var json = JSON.parse(xhr.responseText);
+
+            setTimeout(function () {
+                $scope.$apply(function(){
+
+                   if (json.status == 200){
+                        $scope.success = true;
+                        console.log(json.items);
+                        $scope.files = json.items;
+                        $scope.show_files = true;
+
+                    } else if (json.status == 403){
+                        $scope.info = true;
+                        $scope.message = "Ha ocurrido un error";
+                    }
+
+                });
+            }, 2000);
+
+        }
+        xhr.send();
+
+
+    }
 
     $scope.saveRequest = function(){
 

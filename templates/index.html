@@ -92,8 +92,15 @@
                                 <div class="col-lg-9">
                                     <input type="reset" class="btn btn-secondary" value="Cancelar" ng-click="clearData()">
                                     <input type="submit" class="btn btn-primary" value="Consultar" ng-click="saveRequest()">
-                                    <!--input type="submit" class="btn btn-primary" value="Ver mis solicitudes" ng-click="saveRequest()"-->
+                                    <input type="submit" class="btn btn-primary" value="Ver documentos" ng-click="getDocuments()" >
+                                    <br>
+                                </div>
+                            </div>
 
+                            <!-- Documentos -->
+                            <div ng-hide="!(tree_step)">
+                                <div ng-repeat="x in files">
+                                    <a ng-href="{[{x.link}]}">{[{x.name}]}</a>
                                 </div>
                             </div>
                         </div>

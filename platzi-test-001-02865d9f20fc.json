@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "platzi-test-001",
+  "private_key_id": "02865d9f20fc9a95e25fb76f59d8ce3e641ced2b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCvz3XC/RSFrL1e\n6yX//q/2MhHC/u7Ul6RKA38F5PdZu7okcUn8smMHjhsye8LhaQDWLApJM7AR/sWZ\nVypGzlQo4eYxtrm22A6l+FCysSr2LJ0R0R5MHIOGULp+itTpSLryzIgHse6BuFAl\n8oE9L5dXikBkS+YV4hAFwJun9UgH9niHH+7FVlXwZJL0XMCu1PUQzO6quYpKEldh\nsj8nTLmev488pzFf3WezISVYjP9tm7q4tAOAaNJHvW5Tw5C6zW+8gwTfAfoqUse9\n/vs0stphr2x45rUdZRtaO8MzpN8IGgseCwa4DMEFbnRQEqwoEVEcOfoW+yLqJy/d\n2PXJqkFNAgMBAAECggEACuHL97hDg2yoQg5LCVfh21rJB6lQ7h6+wAgMXjiIaOj6\nQhQzEK2X/Jk6rLrFWr9tmlQahOJqpQqAf5fKGZzez7L/1Rbq0tr3uSUwFYdq0db8\nF+S6O9rN90va50c/m3rxe2LWjqdgTG40o8ypXDisZPI9PxgFk1gtRrXfzJsdjMSF\n80cDtuTArUEtfY28k7Zu5fAEzKnwvv5rOdX3bgMeCkhsZirARN368pUggxXdwCUt\ns0dj6JZs6icDpEfrzwTFsbqp8Jw9ebYdMTFWb11G0jgSLgjLvSs+z/lKf8vRXp25\nlMCiPY4MOL/P1DPkQvz1BtQtnDVCkptmL7lTMFpeEQKBgQDdFuCzz9HEDsKlghcP\n7+nhUP4QMCdIBeQuGNJ65rhvxMK4kLXE08j1PgAxkbtNjXwnijNZ1Q2Cj/kc63BL\nx7B8raA72nMEPTr5wjjcaYngSTbG92Qx4wyVyEKl+yX1yF625NHH1YEuYqqrAzYW\nZRVoDZBsCOWjqd6x3V2VD4NsZQKBgQDLkkPGTwIGeVrR+sMEDWSmGzHO8UuFEigG\nnznecZSBjReVylIECCrMmqxypJ834sdDos5WbjcGGMTuNrfLsLe9y15fa3opNHaR\neXv9vlXuGvB27NPXo0veolfflvMFPeVIpP/hYK5cF1sVkOkNG4sKK9ZNgIoitfNv\nUkUcJgAuyQKBgQCvVoB4Oj3K9kXKSuSNYCCk772+CuJsTTfMkyUCEU5+XZZsF2AA\nrFF4pWYz6baY57dqCEF3Ye8n95SCKfpSLxk5l902+qUy3HiUMUM1EoIlHQtTOkn9\nAmstsreguRA+31y2QbxZdmrP5bIilBZmJl6WugMqmte8N3EEsGGSYM5CvQKBgB5B\nIql6XIaxynmilxEnHGpDaGelHOAuDpzNVUBmCPgoC/VLGF1ZCWNXKYHwTWl03sCC\nlb/qqWrSi5ILt80h+mzOqLvtsT4meeis8WyIuSSmBE7oa6OEtWXlIsIsIPoKdOUT\nAKRyRfeR0Qunebtk+IkOcs8Z5225NPC6fWLtkuFhAoGBAKFk1i9owCobibwe0cKI\nTfZ2pvcBlVgec0BnIGSOQyaBONfB1zkqEEtH39XkKC1shXEdtAvo/IJa55/OiPXW\nTs1ym4S0mJI8OHn5kM7pT/2Ha897OEfDEh28jcyR+f5KBlNYArDpsbhEKFBYq18V\nlzCdkYvtbA2EQzcu21KatpqA\n-----END PRIVATE KEY-----\n",
+  "client_email": "cloud-storage-client@platzi-test-001.iam.gserviceaccount.com",
+  "client_id": "101654561990632328412",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cloud-storage-client%40platzi-test-001.iam.gserviceaccount.com"
+}

@@ -6,7 +6,10 @@ from models import Usuario, Solicitud
 from google.appengine.api import mail
 from tasks import enviar_email
 from google.appengine.ext import deferred
+from helpers import CloudStorageHelper
 
+
+BUCKET = 'platzi-test-001.appspot.com'
 # Flask views
 @app.route('/')
 def index():
@@ -115,3 +118,44 @@ def entregar_reporte():
         )
 
     return "Reportes entregados"
+
+@app.route('/lista_de_objetos')
+def listar_objetos():
+
+    gcs = CloudStorageHelper()
+    archivos_disponibles = gcs.list_buckets()
+
+    response = {}
+    links = []
+
+    for item in archivos_disponibles:
+        name_file = 'https://' + BUCKET + '/' + item['name']
+        links.append(name_file)
+
+    return "Archivos"
+
+
+@app.route('/listar_documentos', methods=['GET', 'POST'])
+def solicitar_documentos():
+    gcs = CloudStorageHelper()
+    archivos_disponibles = gcs.list_buckets()
+
+    response = {}
+    links = []
+
+
+    for item in archivos_disponibles:
+        name_file = 'https://storage.googleapis.com/' + BUCKET + '/' + item['name']
+        object = {
+            'name': item['name'],
+            'link': name_file
+        }
+        links.append(object)
+
+
+    response['status'] = '200'
+    response['total_archivos'] = len(archivos_disponibles)
+    response['items'] = links
+
+
+    return json.dumps(response)
